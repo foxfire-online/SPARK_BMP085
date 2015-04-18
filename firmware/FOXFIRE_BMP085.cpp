@@ -14,7 +14,7 @@
   Written by Kevin Townsend for Adafruit Industries.  
   BSD license, all text above must be included in any redistribution
  ***************************************************************************/
-#include "Adafruit_BMP085_U.h"
+#include "FOXFIRE_BMP085_U.h"
 #include "math.h"
 
 static bmp085_calib_data _bmp085_coeffs;   // Last read accelerometer data will be available here
@@ -181,7 +181,7 @@ static void readRawPressure(int32_t *pressure)
     @brief  Compute B5 coefficient used in temperature & pressure calcs.
 */
 /**************************************************************************/
-int32_t Adafruit_BMP085_Unified::computeB5(int32_t ut) {
+int32_t FOXFIRE_BMP085_Unified::computeB5(int32_t ut) {
   int32_t X1 = (ut - (int32_t)_bmp085_coeffs.ac6) * ((int32_t)_bmp085_coeffs.ac5) >> 15;
   int32_t X2 = ((int32_t)_bmp085_coeffs.mc << 11) / (X1+(int32_t)_bmp085_coeffs.md);
   return X1 + X2;
@@ -194,10 +194,10 @@ int32_t Adafruit_BMP085_Unified::computeB5(int32_t ut) {
  
 /**************************************************************************/
 /*!
-    @brief  Instantiates a new Adafruit_BMP085_Unified class
+    @brief  Instantiates a new FOXFIRE_BMP085_Unified class
 */
 /**************************************************************************/
-Adafruit_BMP085_Unified::Adafruit_BMP085_Unified(int32_t sensorID) {
+FOXFIRE_BMP085_Unified::FOXFIRE_BMP085_Unified(int32_t sensorID) {
   _sensorID = sensorID;
 }
 
@@ -210,7 +210,7 @@ Adafruit_BMP085_Unified::Adafruit_BMP085_Unified(int32_t sensorID) {
     @brief  Setups the HW
 */
 /**************************************************************************/
-bool Adafruit_BMP085_Unified::begin(bmp085_mode_t mode)
+bool FOXFIRE_BMP085_Unified::begin(bmp085_mode_t mode)
 {
   // Enable I2C
   Wire.begin();
@@ -243,7 +243,7 @@ bool Adafruit_BMP085_Unified::begin(bmp085_mode_t mode)
     @brief  Gets the compensated pressure level in kPa
 */
 /**************************************************************************/
-void Adafruit_BMP085_Unified::getPressure(float *pressure)
+void FOXFIRE_BMP085_Unified::getPressure(float *pressure)
 {
   int32_t  ut = 0, up = 0, compp = 0;
   int32_t  x1, x2, b5, b6, x3, b3, p;
@@ -291,7 +291,7 @@ void Adafruit_BMP085_Unified::getPressure(float *pressure)
     @brief  Reads the temperatures in degrees Celsius
 */
 /**************************************************************************/
-void Adafruit_BMP085_Unified::getTemperature(float *temp)
+void FOXFIRE_BMP085_Unified::getTemperature(float *temp)
 {
   int32_t UT, B5;     // following ds convention
   float t;
@@ -324,7 +324,7 @@ void Adafruit_BMP085_Unified::getTemperature(float *temp)
     @param  atmospheric   Atmospheric pressure in hPa
 */
 /**************************************************************************/
-float Adafruit_BMP085_Unified::pressureToAltitude(float seaLevel, float atmospheric)
+float FOXFIRE_BMP085_Unified::pressureToAltitude(float seaLevel, float atmospheric)
 {
   // Equation taken from BMP180 datasheet (page 16):
   //  http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf
@@ -352,7 +352,7 @@ float Adafruit_BMP085_Unified::pressureToAltitude(float seaLevel, float atmosphe
     @param  temp          Temperature in degrees Celsius
 */
 /**************************************************************************/
-float Adafruit_BMP085_Unified::pressureToAltitude(float seaLevel, float atmospheric, float temp)
+float FOXFIRE_BMP085_Unified::pressureToAltitude(float seaLevel, float atmospheric, float temp)
 {
   return pressureToAltitude(seaLevel, atmospheric);
 }
@@ -366,7 +366,7 @@ float Adafruit_BMP085_Unified::pressureToAltitude(float seaLevel, float atmosphe
     @param  atmospheric   Atmospheric pressure in hPa
 */
 /**************************************************************************/
-float Adafruit_BMP085_Unified::seaLevelForAltitude(float altitude, float atmospheric)
+float FOXFIRE_BMP085_Unified::seaLevelForAltitude(float altitude, float atmospheric)
 {
   // Equation taken from BMP180 datasheet (page 17):
   //  http://www.adafruit.com/datasheets/BST-BMP180-DS000-09.pdf
@@ -394,7 +394,7 @@ float Adafruit_BMP085_Unified::seaLevelForAltitude(float altitude, float atmosph
     @param  temp          Temperature in degrees Celsius
 */
 /**************************************************************************/
-float Adafruit_BMP085_Unified::seaLevelForAltitude(float altitude, float atmospheric, float temp)
+float FOXFIRE_BMP085_Unified::seaLevelForAltitude(float altitude, float atmospheric, float temp)
 {
   return seaLevelForAltitude(altitude, atmospheric);
 }
@@ -406,7 +406,7 @@ float Adafruit_BMP085_Unified::seaLevelForAltitude(float altitude, float atmosph
     @brief  Provides the sensor_t data for this sensor
 */
 /**************************************************************************/
-void Adafruit_BMP085_Unified::getSensor(sensor_t *sensor)
+void FOXFIRE_BMP085_Unified::getSensor(sensor_t *sensor)
 {
   /* Clear the sensor_t object */
   memset(sensor, 0, sizeof(sensor_t));
@@ -428,7 +428,7 @@ void Adafruit_BMP085_Unified::getSensor(sensor_t *sensor)
     @brief  Reads the sensor and returns the data as a sensors_event_t
 */
 /**************************************************************************/
-void Adafruit_BMP085_Unified::getEvent(sensors_event_t *event)
+void FOXFIRE_BMP085_Unified::getEvent(sensors_event_t *event)
 {
   float pressure_kPa;
 

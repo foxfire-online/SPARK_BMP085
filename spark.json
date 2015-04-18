@@ -1,7 +1,7 @@
 {
-	"name": "FOXFIRE_BMP085",
+	"name": "FOXFIRE_BMP085_U",
 	"author": "Kevin Townsend",
 	"version": "0.0.0",
 	"license": "BSD",
-	"description": "Adafruit's Unified Driver Library"
+	"description": "Adafruit's Unified Driver Library. This version is made to be compatible with the Spark firmware."
 }
