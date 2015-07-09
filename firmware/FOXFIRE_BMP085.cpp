@@ -213,7 +213,7 @@ Adafruit_BMP085_Unified::Adafruit_BMP085_Unified(int32_t sensorID) {
 bool Adafruit_BMP085_Unified::begin(bmp085_mode_t mode)
 {
   // Enable I2C
-  Wire.begin();
+  //Wire.begin();
 
   /* Mode boundary check */
   if ((mode > BMP085_MODE_ULTRAHIGHRES) || (mode < 0))
